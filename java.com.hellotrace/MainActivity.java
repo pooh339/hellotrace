@@ -1,4 +1,4 @@
-package com.blyang;
+package com.hellotrace;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,26 +40,26 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 	
 	
-    int gatherInterval = 3;  //Î»ÖÃ²É¼¯ÖÜÆÚ (s)
-    int packInterval = 10;  //´ò°üÖÜÆÚ (s)
-    String entityName = null;  // entity±êÊ¶
-    long serviceId = 204976;// Ó¥ÑÛ·şÎñID
-    int traceType = 2;  //¹ì¼£·şÎñÀàĞÍ
-    private static OnStartTraceListener startTraceListener = null;  //¿ªÆô¹ì¼£·şÎñ¼àÌıÆ÷
+    int gatherInterval = 3;  
+    int packInterval = 10;  
+    String entityName = null;  
+    long serviceId = 204976;// é¹°çœ¼æœåŠ¡ID
+    int traceType = 2;  
+    private static OnStartTraceListener startTraceListener = null;  //å¼€å¯è½¨è¿¹æœåŠ¡ç›‘å¬å™¨
     
 	private static MapView mapView = null;
 	private static BaiduMap baiduMap = null;
 	private static OnEntityListener entityListener = null;
-	private RefreshThread refreshThread = null;  //Ë¢ĞÂµØÍ¼Ïß³ÌÒÔ»ñÈ¡ÊµÊ±µã
+	private RefreshThread refreshThread = null;  
 	private static MapStatusUpdate msUpdate = null;
-	private static BitmapDescriptor realtimeBitmap;  //Í¼±ê
-	private static OverlayOptions overlay;  //¸²¸ÇÎï
-	private static List<LatLng> pointList = new ArrayList<LatLng>();  //¶¨Î»µãµÄ¼¯ºÏ
-	private static PolylineOptions polyline = null;  //Â·Ïß¸²¸ÇÎï
+	private static BitmapDescriptor realtimeBitmap;  
+	private static OverlayOptions overlay; 
+	private static List<LatLng> pointList = new ArrayList<LatLng>();  
+	private static PolylineOptions polyline = null;  
 	
 	
-    private Trace trace;  // ÊµÀı»¯¹ì¼£·şÎñ
-    private LBSTraceClient client;  // ÊµÀı»¯¹ì¼£·şÎñ¿Í»§¶Ë
+    private Trace trace;  // å®ä¾‹åŒ–è½¨è¿¹æœåŠ¡
+    private LBSTraceClient client;  // å®ä¾‹åŒ–è½¨è¿¹æœåŠ¡å®¢æˆ·ç«¯
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -77,11 +77,11 @@ public class MainActivity extends Activity {
 		
 		
 		
-		client.startTrace(trace, startTraceListener);  // ¿ªÆô¹ì¼£·şÎñ
+		client.startTrace(trace, startTraceListener);  // å¼€å¯è½¨è¿¹æœåŠ¡
 	}
 
 	/**
-	 * ³õÊ¼»¯¸÷¸ö²ÎÊı
+	 * åˆå§‹åŒ–å„ä¸ªå‚æ•°
 	 */
 	 private void init() {
 		 
@@ -89,22 +89,22 @@ public class MainActivity extends Activity {
 		 baiduMap = mapView.getMap();
 		 mapView.showZoomControls(false);
 		 
-		 entityName = getImei(getApplicationContext());  //ÊÖ»úImeiÖµµÄ»ñÈ¡£¬ÓÃÀ´³äµ±ÊµÌåÃû
+		 entityName = getImei(getApplicationContext());  //æ‰‹æœºImeiå€¼çš„è·å–ï¼Œç”¨æ¥å……å½“å®ä½“å
 		 
-         client = new LBSTraceClient(getApplicationContext());  //ÊµÀı»¯¹ì¼£·şÎñ¿Í»§¶Ë
+         client = new LBSTraceClient(getApplicationContext());  //å®ä¾‹åŒ–è½¨è¿¹æœåŠ¡å®¢æˆ·ç«¯
          
-         trace = new Trace(getApplicationContext(), serviceId, entityName, traceType);  //ÊµÀı»¯¹ì¼£·şÎñ
+         trace = new Trace(getApplicationContext(), serviceId, entityName, traceType);  //å®ä¾‹åŒ–è½¨è¿¹æœåŠ¡
          
-         client.setInterval(gatherInterval, packInterval);  //ÉèÖÃÎ»ÖÃ²É¼¯ºÍ´ò°üÖÜÆÚ
+         client.setInterval(gatherInterval, packInterval);  //è®¾ç½®ä½ç½®é‡‡é›†å’Œæ‰“åŒ…å‘¨æœŸ
 	 }
 	 
 	 
 	 /**
-	  * ³õÊ¼»¯ÉèÖÃÊµÌå×´Ì¬¼àÌıÆ÷
+	  * åˆå§‹åŒ–è®¾ç½®å®ä½“çŠ¶æ€ç›‘å¬å™¨
 	  */
 	 private void initOnEntityListener(){
 		 
-		 //ÊµÌå×´Ì¬¼àÌıÆ÷
+		 //å®ä½“çŠ¶æ€ç›‘å¬å™¨
 		 entityListener = new OnEntityListener(){
 
 			@Override
@@ -112,7 +112,7 @@ public class MainActivity extends Activity {
 				Looper.prepare();
 				Toast.makeText(
 						getApplicationContext(), 
-						"entityÇëÇóÊ§°ÜµÄ»Øµ÷½Ó¿ÚĞÅÏ¢£º"+arg0, 
+						"entityè¯·æ±‚å¤±è´¥çš„å›è°ƒæ¥å£ä¿¡æ¯ï¼š"+arg0, 
 						Toast.LENGTH_SHORT)
 						.show();
 				Looper.loop();
@@ -121,7 +121,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onQueryEntityListCallback(String arg0) {
 				/**
-				 * ²éÑ¯ÊµÌå¼¯ºÏ»Øµ÷º¯Êı£¬´ËÊ±µ÷ÓÃÊµÊ±¹ì¼£·½·¨
+				 * æŸ¥è¯¢å®ä½“é›†åˆå›è°ƒå‡½æ•°ï¼Œæ­¤æ—¶è°ƒç”¨å®æ—¶è½¨è¿¹æ–¹æ³•
 				 */
 				showRealtimeTrack(arg0);  
 			}
@@ -131,12 +131,12 @@ public class MainActivity extends Activity {
 	 
 	 
 	 
-	/** ×·×Ù¿ªÊ¼ */
+	/** è¿½è¸ªå¼€å§‹ */
 	private void initOnStartTraceListener() {
 		
-		// ÊµÀı»¯¿ªÆô¹ì¼£·şÎñ»Øµ÷½Ó¿Ú
+		// å®ä¾‹åŒ–å¼€å¯è½¨è¿¹æœåŠ¡å›è°ƒæ¥å£
 		startTraceListener = new OnStartTraceListener() {
-			// ¿ªÆô¹ì¼£·şÎñ»Øµ÷½Ó¿Ú£¨arg0 : ÏûÏ¢±àÂë£¬arg1 : ÏûÏ¢ÄÚÈİ£¬ÏêÇé²é¿´Àà²Î¿¼£©
+			// å¼€å¯è½¨è¿¹æœåŠ¡å›è°ƒæ¥å£ï¼ˆarg0 : æ¶ˆæ¯ç¼–ç ï¼Œarg1 : æ¶ˆæ¯å†…å®¹ï¼Œè¯¦æƒ…æŸ¥çœ‹ç±»å‚è€ƒï¼‰
 			@Override
 			public void onTraceCallback(int arg0, String arg1) {
 				Log.i("TAG", "onTraceCallback=" + arg1);
@@ -145,7 +145,7 @@ public class MainActivity extends Activity {
 				}
 			}
 
-			// ¹ì¼£·şÎñÍÆËÍ½Ó¿Ú£¨ÓÃÓÚ½ÓÊÕ·şÎñ¶ËÍÆËÍÏûÏ¢£¬arg0 : ÏûÏ¢ÀàĞÍ£¬arg1 : ÏûÏ¢ÄÚÈİ£¬ÏêÇé²é¿´Àà²Î¿¼£©
+			// è½¨è¿¹æœåŠ¡æ¨é€æ¥å£ï¼ˆç”¨äºæ¥æ”¶æœåŠ¡ç«¯æ¨é€æ¶ˆæ¯ï¼Œarg0 : æ¶ˆæ¯ç±»å‹ï¼Œarg1 : æ¶ˆæ¯å†…å®¹ï¼Œè¯¦æƒ…æŸ¥çœ‹ç±»å‚è€ƒï¼‰
 			@Override
 			public void onTracePushCallback(byte arg0, String arg1) {
 				Log.i("TAG", "onTracePushCallback=" + arg1);
@@ -158,7 +158,7 @@ public class MainActivity extends Activity {
 	
 	
 	/**
-	 * ¹ì¼£Ë¢ĞÂÏß³Ì
+	 * è½¨è¿¹åˆ·æ–°çº¿ç¨‹
 	 * @author BLYang
 	 */
 	private class RefreshThread extends Thread{
@@ -172,7 +172,7 @@ public class MainActivity extends Activity {
 				try{
 					Thread.sleep(packInterval * 1000);
 				}catch(InterruptedException e){
-					System.out.println("Ïß³ÌĞİÃßÊ§°Ü");
+					System.out.println("çº¿ç¨‹ä¼‘çœ å¤±è´¥");
 				}
 			}
 			
@@ -180,7 +180,7 @@ public class MainActivity extends Activity {
 	}
 	 
 	/**
-	 * ²éÑ¯ÊµÊ±ÏßÂ·
+	 * æŸ¥è¯¢å®æ—¶çº¿è·¯
 	 */
 	private void queryRealtimeTrack(){
 		
@@ -206,7 +206,7 @@ public class MainActivity extends Activity {
 	
 	
 	/**
-	 * Õ¹Ê¾ÊµÊ±ÏßÂ·Í¼
+	 * å±•ç¤ºå®æ—¶çº¿è·¯å›¾
 	 * @param realtimeTrack
 	 */
 	protected void showRealtimeTrack(String realtimeTrack){
@@ -215,7 +215,7 @@ public class MainActivity extends Activity {
 			return;
 		}
 		
-		//Êı¾İÒÔJSONĞÎÊ½´æÈ¡
+		//æ•°æ®ä»¥JSONå½¢å¼å­˜å–
 		RealtimeTrackData realtimeTrackData = GsonService.parseJson(realtimeTrack, RealtimeTrackData.class);
 		
 		if(realtimeTrackData != null && realtimeTrackData.getStatus() ==0){
@@ -227,7 +227,7 @@ public class MainActivity extends Activity {
 				drawRealtimePoint(latLng);
 			}
 			else{
-				Toast.makeText(getApplicationContext(), "µ±Ç°ÎŞ¹ì¼£µã", Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(), "å½“å‰æ— è½¨è¿¹ç‚¹", Toast.LENGTH_LONG).show();
 			}
 			
 		}
@@ -235,7 +235,7 @@ public class MainActivity extends Activity {
 	}
 	
 	/**
-	 * »­³öÊµÊ±ÏßÂ·µã
+	 * ç”»å‡ºå®æ—¶çº¿è·¯ç‚¹
 	 * @param point
 	 */
 	private void drawRealtimePoint(LatLng point){
@@ -275,7 +275,7 @@ public class MainActivity extends Activity {
 	
 	
 	/**
-	 * Æô¶¯Ë¢ĞÂÏß³Ì
+	 * å¯åŠ¨åˆ·æ–°çº¿ç¨‹
 	 * @param isStart
 	 */
 	private void startRefreshThread(boolean isStart){
@@ -300,7 +300,7 @@ public class MainActivity extends Activity {
 	
 	
 	/**
-	 * »ñÈ¡ÊÖ»úµÄImeiÂë£¬×÷ÎªÊµÌå¶ÔÏóµÄ±ê¼ÇÖµ
+	 * è·å–æ‰‹æœºçš„Imeiç ï¼Œä½œä¸ºå®ä½“å¯¹è±¡çš„æ ‡è®°å€¼
 	 * @param context
 	 * @return
 	 */
@@ -310,7 +310,7 @@ public class MainActivity extends Activity {
         try {
             mImei = ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
         } catch (Exception e) {
-            System.out.println("»ñÈ¡IMEIÂëÊ§°Ü");
+            System.out.println("è·å–IMEIç å¤±è´¥");
             mImei = "NULL";
         }
         return mImei;
