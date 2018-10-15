@@ -1,4 +1,4 @@
-package com.blyang;
+package com.hellotrace;
 
 import com.google.gson.Gson;
 
@@ -12,7 +12,7 @@ public class GsonService {
         } catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();
-            System.out.println("Ω‚Œˆjson ß∞‹");
+            System.out.println("Â§±Ë¥•");
         }
         return t;
 
