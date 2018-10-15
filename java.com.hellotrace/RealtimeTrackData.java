@@ -1,25 +1,21 @@
-package com.blyang;
+package com.hellotrace;
 
 import java.util.List;
 
 import com.baidu.mapapi.model.LatLng;
 
-/**
- * ÊµÊ±¹ì¼£Êı¾İ
- * 
- * 
- */
+
 public class RealtimeTrackData {
-    public int status; // ×´Ì¬Âë£¬0Îª³É¹¦
-    public int size; // ·µ»Ø½á¹ûÌõÊı£¬¸ÃÒ³·µ»ØÁË¼¸ÌõÊı¾İ
-    public int total; // ·ûºÏÌõ¼ş½á¹ûÌõÊı£¬Ò»¹²ÓĞ¼¸Ìõ·ûºÏÌõ¼şµÄÊı¾İ
+    public int status; 
+    public int size; 
+    public int total; 
     public List<Entities> entities;
-    public String message; // ÏìÓ¦ĞÅÏ¢,¶ÔstatusµÄÖĞÎÄÃèÊö
+    public String message; 
 
     public class Entities {
-        public String create_time; // ´´½¨Ê±¼ä ¸ñÊ½»¯Ê±¼ä ¸ÃÊ±¼äÎª·şÎñ¶ËÊ±¼ä
-        public String modify_time; // ĞŞ¸ÄÊ±¼ä
-        public RealtimePoint realtime_point; // ÊµÊ±¹ì¼£ĞÅÏ¢
+        public String create_time; 
+        public String modify_time;
+        public RealtimePoint realtime_point; // å®æ—¶è½¨è¿¹ä¿¡æ¯
 
         public String getCreate_time() {
             return create_time;
@@ -48,8 +44,8 @@ public class RealtimeTrackData {
     }
 
     public class RealtimePoint {
-        public List<Double> location;// ¾­Î³¶È Array °Ù¶È¼ÓÃÜ×ø±ê
-        public String loc_time;// ¸ÃtrackÊµÊ±µãµÄÉÏ´«Ê±¼ä UNIXÊ±¼ä´Á ¸ÃÊ±¼äÎªÓÃ»§ÉÏ´«µÄÊ±¼ä
+        public List<Double> location;// ç»çº¬åº¦ Array ç™¾åº¦åŠ å¯†åæ ‡
+        public String loc_time;// è¯¥trackå®æ—¶ç‚¹çš„ä¸Šä¼ æ—¶é—´ UNIXæ—¶é—´æˆ³ è¯¥æ—¶é—´ä¸ºç”¨æˆ·ä¸Šä¼ çš„æ—¶é—´
 
         public List<Double> getLocation() {
             return location;
